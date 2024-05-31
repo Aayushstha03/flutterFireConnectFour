@@ -9,13 +9,13 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.deepOrange,
-        title: const Text(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Text(
           "Connect 4 ",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
         ),
       ),
       body: SizedBox(
@@ -24,7 +24,7 @@ class Welcome extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MaterialButton(
+            FilledButton.tonal(
               onPressed: () {
                 coin = [
                   ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
@@ -34,31 +34,18 @@ class Welcome extends StatelessWidget {
                   ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
                   ['w', 'w', 'w', 'w', 'w', 'w', 'w']
                 ];
-                checkk = false;
-                print("started_con ${false}");
-
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const Connect4Screen();
                 }));
               },
-              color: Colors.deepOrange,
               child: const Text(
-                "Let’s Go",
-                style: TextStyle(color: Colors.black),
+                'Start Game!',
+                style: TextStyle(fontSize: 20),
               ),
-            ),
-            const SizedBox(
-              height: 15,
             ),
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   child: Icon(Icons.add),
-      //   onPressed: (){
-      //     print(checkk);
-      //   },
-      // ),
     );
   }
 }

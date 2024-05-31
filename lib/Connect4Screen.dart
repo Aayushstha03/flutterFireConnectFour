@@ -13,9 +13,9 @@ class Connect4Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: Colors.deepOrange,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         leading: IconButton(
           onPressed: () {
             checkk = false;
@@ -27,7 +27,6 @@ class Connect4Screen extends StatelessWidget {
           "Connect 4",
           style: TextStyle(color: Colors.black),
         ),
-        titleSpacing: MediaQuery.of(context).size.width / 4,
         elevation: 0,
       ),
       body: Board(),
