@@ -21,7 +21,6 @@ List<List<String>> coin = [
 
 class Barr extends StatefulWidget {
   final int index;
-
   const Barr({Key? key, required this.index}) : super(key: key);
 
   @override
