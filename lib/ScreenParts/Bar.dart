@@ -9,14 +9,62 @@ import '../Connect4Screen.dart';
 import 'Cell.dart';
 import 'cubit/state.dart';
 
-bool checkk = false; //false
-List<List<String>> coin = [
-  ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-  ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-  ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-  ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-  ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-  ['w', 'w', 'w', 'w', 'w', 'w', 'w']
+bool check = false; //false
+List<List<Color>> coin = [
+  [
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white
+  ],
+  [
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white
+  ],
+  [
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white
+  ],
+  [
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white
+  ],
+  [
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white
+  ],
+  [
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white
+  ]
 ];
 
 class Barr extends StatefulWidget {
@@ -46,12 +94,12 @@ class _BarrState extends State<Barr> {
           },
           child: Column(
             children: [
-              Cell(col: coin[0][widget.index]),
-              Cell(col: coin[1][widget.index]),
-              Cell(col: coin[2][widget.index]),
-              Cell(col: coin[3][widget.index]),
-              Cell(col: coin[4][widget.index]),
-              Cell(col: coin[5][widget.index]),
+              Cell(color: coin[0][widget.index]),
+              Cell(color: coin[1][widget.index]),
+              Cell(color: coin[2][widget.index]),
+              Cell(color: coin[3][widget.index]),
+              Cell(color: coin[4][widget.index]),
+              Cell(color: coin[5][widget.index]),
             ],
           ),
         );
@@ -61,37 +109,34 @@ class _BarrState extends State<Barr> {
 
   void putCoin(int index) {
     for (int i = 5; i >= 0; i--) {
-      if (coin[i][index] == 'w') {
-        coin[i][index] = checkk ? 'o' : 'b';
-        checkk = !checkk;
+      if (coin[i][index] == Colors.white) {
+        coin[i][index] = check ? Colors.orange : Colors.black;
+        check = !check;
         checkWin(i, index, coin[i][index]);
         break;
       }
     }
   }
 
-  void checkWin(int x, int y, String s) {
+  void checkWin(int x, int y, Color color) {
     int col = 0;
     int row = 0;
     int diag = 0;
     int rediag = 0;
-    String player = s == 'b' ? "Black" : "Orange";
+    Color player = color;
     int rows = coin.length; // row num
     int cols = coin[0].length; // col num
     if (!win) //rule 1 : 4 from same color in same row  win
 
     {
       for (int i = 0; i < rows; i++) {
-        if (coin[i][y] == s)
+        if (coin[i][y] == color) {
           col++;
-        else {
+        } else {
           col = 0;
         }
         if (col == 4) {
           win = true;
-          // Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) {
-          //   return Connect4Screen();
-          // }));
           break;
         }
       }
@@ -99,16 +144,11 @@ class _BarrState extends State<Barr> {
     if (!win) //rule 2 : 4 from same color in same col win
     {
       for (int i = 0; i < cols; i++) {
-        //print(coin[x][i] +"   "+s);
-        //print(coin[x][i]);
-        if (coin[x][i] == s) {
+        if (coin[x][i] == color) {
           row++;
-          //print('hiiiii ${i}');
-          //print(coin[x][i] +"   "+s);
         } else {
           row = 0;
         }
-        //print("Row     ${row}");
         if (row == 4) {
           win = true;
           break;
@@ -130,7 +170,7 @@ class _BarrState extends State<Barr> {
       }
 
       while (startRow < rows && startCol < cols) {
-        if (coin[startRow++][startCol++] == s) {
+        if (coin[startRow++][startCol++] == color) {
           diag++;
         } else {
           diag = 0;
@@ -159,7 +199,7 @@ class _BarrState extends State<Barr> {
       }
       // print("revers   start_Row    ${start_Row}       start_Col    ${start_Col}");
       while (startRow < rows && startCol >= 0) {
-        if (coin[startRow++][startCol--] == s) {
+        if (coin[startRow++][startCol--] == color) {
           rediag++;
         } else {
           rediag = 0;
@@ -173,7 +213,7 @@ class _BarrState extends State<Barr> {
     int tai = 0;
     for (int i = 0; i < cols; i++) // from 0 to columns num
     {
-      if (coin[0][i] == 'w') {
+      if (coin[0][i] == Colors.white) {
         break;
       } else {
         tai++;
@@ -182,7 +222,7 @@ class _BarrState extends State<Barr> {
 
     if (win || tai == cols) {
       win = false;
-      checkk = false;
+      check = false;
 
       showDialog(
         barrierDismissible: false,
@@ -237,14 +277,62 @@ class _BarrState extends State<Barr> {
                     MaterialButton(
                       onPressed: () {
                         coin = [
-                          ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                          ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                          ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                          ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                          ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                          ['w', 'w', 'w', 'w', 'w', 'w', 'w']
+                          [
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white
+                          ],
+                          [
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white
+                          ],
+                          [
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white
+                          ],
+                          [
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white
+                          ],
+                          [
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white
+                          ],
+                          [
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white,
+                            Colors.white
+                          ]
                         ];
-                        checkk = false;
+                        check = false;
                         Navigator.pop(context);
                         Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) {
