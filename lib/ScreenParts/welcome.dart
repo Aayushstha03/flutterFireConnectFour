@@ -10,41 +10,34 @@ class Welcome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text(
-          "Connect 4 ",
-          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
-        ),
-      ),
-      body: SizedBox(
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FilledButton.tonal(
-              onPressed: () {
-                coin = [
-                  ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                  ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                  ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                  ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                  ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                  ['w', 'w', 'w', 'w', 'w', 'w', 'w']
-                ];
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const Connect4Screen();
-                }));
-              },
-              child: const Text(
-                'Start Game!',
-                style: TextStyle(fontSize: 20),
-              ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Image.asset("assets/logo.png"),
+          ),
+          FilledButton.tonal(
+            onPressed: () {
+              coin = [
+                ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
+                ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
+                ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
+                ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
+                ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
+                ['w', 'w', 'w', 'w', 'w', 'w', 'w']
+              ];
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const Connect4Screen();
+              }));
+            },
+            child: const Text(
+              'Start Game!',
+              style: TextStyle(fontSize: 20),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 100),
+        ],
       ),
     );
   }
