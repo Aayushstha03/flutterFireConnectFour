@@ -7,10 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../Connect4Screen.dart';
 import 'Cell.dart';
-import 'Startedcoin.dart';
 import 'cubit/state.dart';
 
-bool checkk = start_coin; //false
+bool checkk = false; //false
 List<List<String>> coin = [
   ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
   ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
@@ -248,7 +247,7 @@ class _BarrState extends State<Barr> {
                             ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
                             ['w', 'w', 'w', 'w', 'w', 'w', 'w']
                           ];
-                          checkk = start_coin;
+                          checkk = false;
                           Navigator.pop(context);
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (context) {

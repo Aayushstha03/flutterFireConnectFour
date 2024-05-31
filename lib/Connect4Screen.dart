@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 import 'ScreenParts/Bar.dart';
 import 'ScreenParts/Board.dart';
-import 'ScreenParts/Startedcoin.dart';
 
 class Connect4Screen extends StatelessWidget {
   const Connect4Screen({Key? key}) : super(key: key);
@@ -19,7 +18,7 @@ class Connect4Screen extends StatelessWidget {
         backgroundColor: Colors.deepOrange,
         leading: IconButton(
           onPressed: () {
-            checkk = start_coin;
+            checkk = false;
             Navigator.pop(context);
           },
           icon: Icon(Icons.arrow_back),
