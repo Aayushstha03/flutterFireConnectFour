@@ -65,11 +65,7 @@ class _BarrState extends State<Barr> {
       if (coin[i][index] == 'w') {
         coin[i][index] = checkk ? 'o' : 'b';
         checkk = !checkk;
-        // print("done ${i} + ${coin[i][index]}");
-        //print("x  ${i}");
-        //print(coin[i][index]);
         checkWin(i, index, coin[i][index]);
-        // print(coin);
         break;
       }
     }
@@ -93,7 +89,6 @@ class _BarrState extends State<Barr> {
           col = 0;
         }
         if (col == 4) {
-          print("Col win");
           win = true;
           // Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) {
           //   return Connect4Screen();
@@ -116,7 +111,6 @@ class _BarrState extends State<Barr> {
         }
         //print("Row     ${row}");
         if (row == 4) {
-          print("row win");
           win = true;
           break;
         }
@@ -172,7 +166,6 @@ class _BarrState extends State<Barr> {
           rediag = 0;
         }
         if (rediag == 4) {
-          print("ReDiag win");
           win = true;
           break;
         }
@@ -197,76 +190,80 @@ class _BarrState extends State<Barr> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            backgroundColor: Colors.deepOrange,
-            title: Container(
-              color: Colors.deepOrange,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      width: double.infinity,
-                      color: Colors.green,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                    width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
                         child: tai == 7
                             ? Text(
-                                "Ta3adol",
+                                "DRAW!",
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondaryContainer,
+                                    fontSize: 28,
                                     fontWeight: FontWeight.bold),
                               )
                             : Text(
-                                "$player is the winner",
+                                "$player wins!",
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondaryContainer,
+                                    fontSize: 28,
                                     fontWeight: FontWeight.bold),
                               ),
-                      )),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    "Do you want to play again?!",
+                      ),
+                    )),
+                SizedBox(
+                  height: 15,
+                ),
+                Center(
+                  child: Text(
+                    "Do you want to play again?",
                     style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                      color: Theme.of(context).colorScheme.onSecondaryContainer,
+                      fontSize: 20,
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      MaterialButton(
-                        onPressed: () {
-                          coin = [
-                            ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                            ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                            ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                            ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                            ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                            ['w', 'w', 'w', 'w', 'w', 'w', 'w']
-                          ];
-                          checkk = false;
-                          Navigator.pop(context);
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) {
-                            return Connect4Screen();
-                          }));
-                        },
-                        child: Icon(Icons.done),
-                      ),
-                      MaterialButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        },
-                        child: Icon(Icons.dangerous_outlined),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    MaterialButton(
+                      onPressed: () {
+                        coin = [
+                          ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
+                          ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
+                          ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
+                          ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
+                          ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
+                          ['w', 'w', 'w', 'w', 'w', 'w', 'w']
+                        ];
+                        checkk = false;
+                        Navigator.pop(context);
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) {
+                          return Connect4Screen();
+                        }));
+                      },
+                      child: Icon(Icons.done),
+                    ),
+                    MaterialButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      },
+                      child: Icon(Icons.dangerous_outlined),
+                    ),
+                  ],
+                ),
+              ],
             ),
           );
         },
