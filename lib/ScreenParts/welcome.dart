@@ -31,9 +31,28 @@ class Welcome extends StatelessWidget {
                 return const Connect4Screen();
               }));
             },
-            child: const Text(
-              'Start Game!',
-              style: TextStyle(fontSize: 20),
+            child: const SizedBox(
+              height: 80,
+              width: 175,
+              child: Center(
+                child: Text(
+                  'Start Game!',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
+          ),
+          const FilledButton.tonal(
+            onPressed: null,
+            child: SizedBox(
+              height: 80,
+              width: 175,
+              child: Center(
+                child: Text(
+                  'Settings',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 100),

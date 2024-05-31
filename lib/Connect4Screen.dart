@@ -4,7 +4,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'ScreenParts/Bar.dart';
 import 'ScreenParts/Board.dart';
 
 class Connect4Screen extends StatelessWidget {
@@ -14,22 +13,12 @@ class Connect4Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        leading: IconButton(
-          onPressed: () {
-            checkk = false;
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back),
-        ),
-        title: Text(
-          "Connect 4",
-          style: TextStyle(color: Colors.black),
-        ),
-        elevation: 0,
-      ),
       body: Board(),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: null,
+        icon: Icon(Icons.close),
+        label: Text('Quit'),
+      ),
     );
   }
 }
