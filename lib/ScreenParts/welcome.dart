@@ -94,7 +94,7 @@ class Welcome extends StatelessWidget {
           FilledButton.tonal(
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return SettingsPage();
+                return const SettingsPage();
               }));
             },
             child: const SizedBox(

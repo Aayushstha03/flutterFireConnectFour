@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'ScreenParts/welcome.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:connect4/ScreenParts/welcome.dart';
+import 'package:connect4/ScreenParts/cubit/cubit.dart'; // Import the GameCubit
 
 void main() {
   runApp(const MyApp());
@@ -9,20 +10,22 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Connect Four',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.lightGreen,
-          brightness: Brightness.dark,
+    return BlocProvider(
+      create: (context) => GameCubit(),
+      child: MaterialApp(
+        title: 'Connect Four',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.lightGreen,
+            brightness: Brightness.dark,
+          ),
         ),
+        home: const Welcome(),
+        debugShowCheckedModeBanner: false,
       ),
-      home: const Welcome(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:connect4/ScreenParts/cubit/cubit.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -8,11 +10,21 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  Color playerOne = Colors.red;
-  Color playerTwo = Colors.yellow;
+  late Color playerOne;
+  late Color playerTwo;
+
+  @override
+  void initState() {
+    super.initState();
+    final gameCubit = GameCubit.get(context);
+    playerOne = gameCubit.playerOneColor ?? Colors.red;
+    playerTwo = gameCubit.playerTwoColor ?? Colors.yellow;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final gameCubit = GameCubit.get(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -22,15 +34,15 @@ class _SettingsPageState extends State<SettingsPage> {
         onPressed: () {
           if (playerOne.hashCode == playerTwo.hashCode) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text("Invalid! Both players have same color!"),
-              duration: Durations.long1,
+              content: Text("Invalid! Both players have the same color!"),
+              duration: Duration(seconds: 2),
             ));
           } else {
+            gameCubit.setPlayerColors(playerOne, playerTwo);
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text("Saved custom colors!"),
-              duration: Durations.long1,
+              duration: Duration(seconds: 2),
             ));
-
             Navigator.pop(context);
           }
         },
