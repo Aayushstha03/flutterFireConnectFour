@@ -108,9 +108,13 @@ class _BarrState extends State<Barr> {
   }
 
   void putCoin(int index) {
+    final gameCubit = GameCubit.get(context);
+    final playerOneColor = gameCubit.playerOneColor ?? Colors.red;
+    final playerTwoColor = gameCubit.playerTwoColor ?? Colors.yellow;
+
     for (int i = 5; i >= 0; i--) {
       if (coin[i][index] == Colors.white) {
-        coin[i][index] = check ? Colors.orange : Colors.black;
+        coin[i][index] = check ? playerTwoColor : playerOneColor;
         check = !check;
         checkWin(i, index, coin[i][index]);
         break;
