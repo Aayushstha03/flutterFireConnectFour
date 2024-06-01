@@ -19,7 +19,21 @@ class _SettingsPageState extends State<SettingsPage> {
         centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          if (playerOne.hashCode == playerTwo.hashCode) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text("Invalid! Both players have same color!"),
+              duration: Durations.long1,
+            ));
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text("Saved custom colors!"),
+              duration: Durations.long1,
+            ));
+
+            Navigator.pop(context);
+          }
+        },
         icon: const Icon(Icons.save_outlined),
         label: const Text('Save'),
       ),
@@ -38,6 +52,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Radio(
+                    fillColor: MaterialStateProperty.all(Colors.red),
                     value: Colors.red,
                     groupValue: playerOne,
                     onChanged: (value) {
@@ -47,6 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
+                    fillColor: MaterialStateProperty.all(Colors.blue),
                     value: Colors.blue,
                     groupValue: playerOne,
                     onChanged: (value) {
@@ -56,6 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
+                    fillColor: MaterialStateProperty.all(Colors.yellow),
                     value: Colors.yellow,
                     groupValue: playerOne,
                     onChanged: (value) {
@@ -65,6 +82,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
+                    fillColor: MaterialStateProperty.all(Colors.teal),
                     value: Colors.teal,
                     groupValue: playerOne,
                     onChanged: (value) {
@@ -74,6 +92,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
+                    fillColor: MaterialStateProperty.all(Colors.green),
                     value: Colors.green,
                     groupValue: playerOne,
                     onChanged: (value) {
@@ -83,6 +102,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
+                    fillColor: MaterialStateProperty.all(Colors.purple),
                     value: Colors.purple,
                     groupValue: playerOne,
                     onChanged: (value) {
@@ -92,6 +112,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
+                    fillColor: MaterialStateProperty.all(Colors.black),
                     value: Colors.black,
                     groupValue: playerOne,
                     onChanged: (value) {
@@ -117,6 +138,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Radio(
+                    fillColor: MaterialStateProperty.all(Colors.red),
                     value: Colors.red,
                     groupValue: playerTwo,
                     onChanged: (value) {
@@ -126,6 +148,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
+                    fillColor: MaterialStateProperty.all(Colors.blue),
                     value: Colors.blue,
                     groupValue: playerTwo,
                     onChanged: (value) {
@@ -135,6 +158,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
+                    fillColor: MaterialStateProperty.all(Colors.yellow),
                     value: Colors.yellow,
                     groupValue: playerTwo,
                     onChanged: (value) {
@@ -144,6 +168,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
+                    fillColor: MaterialStateProperty.all(Colors.teal),
                     value: Colors.teal,
                     groupValue: playerTwo,
                     onChanged: (value) {
@@ -153,6 +178,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
+                    fillColor: MaterialStateProperty.all(Colors.green),
                     value: Colors.green,
                     groupValue: playerTwo,
                     onChanged: (value) {
@@ -162,6 +188,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
+                    fillColor: MaterialStateProperty.all(Colors.purple),
                     value: Colors.purple,
                     groupValue: playerTwo,
                     onChanged: (value) {
@@ -171,6 +198,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
+                    fillColor: MaterialStateProperty.all(Colors.black),
                     value: Colors.black,
                     groupValue: playerTwo,
                     onChanged: (value) {

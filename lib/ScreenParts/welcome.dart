@@ -1,7 +1,7 @@
-import 'package:connect4/settings.dart';
+import 'package:connect4/ScreenParts/settings.dart';
 import 'package:flutter/material.dart';
 
-import '../Connect4Screen.dart';
+import 'Connect4Screen.dart';
 import 'Bar.dart';
 
 class Welcome extends StatelessWidget {

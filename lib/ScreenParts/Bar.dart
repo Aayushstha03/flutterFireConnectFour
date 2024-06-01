@@ -5,7 +5,7 @@ import 'package:connect4/ScreenParts/cubit/cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../Connect4Screen.dart';
+import 'Connect4Screen.dart';
 import 'Cell.dart';
 import 'cubit/state.dart';
 

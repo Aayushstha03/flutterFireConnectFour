@@ -4,7 +4,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'ScreenParts/board.dart';
+import 'board.dart';
 
 class Connect4Screen extends StatelessWidget {
   const Connect4Screen({Key? key}) : super(key: key);
