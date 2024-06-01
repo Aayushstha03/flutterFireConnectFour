@@ -5,7 +5,7 @@ import 'Bar.dart';
 import 'cubit/cubit.dart';
 import 'cubit/state.dart';
 
-String player = "Orange";
+// String player = "Orange";
 
 class Board extends StatefulWidget {
   const Board({Key? key}) : super(key: key);

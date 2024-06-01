@@ -1,3 +1,4 @@
+import 'package:connect4/settings.dart';
 import 'package:flutter/material.dart';
 
 import '../Connect4Screen.dart';
@@ -20,12 +21,60 @@ class Welcome extends StatelessWidget {
           FilledButton.tonal(
             onPressed: () {
               coin = [
-                ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                ['w', 'w', 'w', 'w', 'w', 'w', 'w']
+                [
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white
+                ],
+                [
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white
+                ],
+                [
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white
+                ],
+                [
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white
+                ],
+                [
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white
+                ],
+                [
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white
+                ]
               ];
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return const Connect4Screen();
@@ -42,9 +91,13 @@ class Welcome extends StatelessWidget {
               ),
             ),
           ),
-          const FilledButton.tonal(
-            onPressed: null,
-            child: SizedBox(
+          FilledButton.tonal(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return SettingsPage();
+              }));
+            },
+            child: const SizedBox(
               height: 80,
               width: 175,
               child: Center(
