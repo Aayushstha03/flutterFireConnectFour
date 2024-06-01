@@ -5,14 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class GameCubit extends Cubit<State_> {
   GameCubit() : super(InitState());
   static GameCubit get(context) => BlocProvider.of(context);
-  String? player;
-  Color? playerOneColor;
-  Color? playerTwoColor;
-
-  void setPlayer(bool start) {
-    player = "Player 1";
-    emit(PlayerState());
-  }
+  String player = 'Player 1';
+  Color playerOneColor = Colors.red;
+  Color playerTwoColor = Colors.yellow;
 
   void changePlayer() {
     player = player == 'Player 1' ? 'Player 2' : "Player 1";

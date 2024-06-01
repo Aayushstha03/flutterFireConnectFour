@@ -77,12 +77,25 @@ class Barr extends StatefulWidget {
 
 class _BarrState extends State<Barr> {
   bool win = false;
+  late Color playerOneColor;
+  late Color playerTwoColor;
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final gameCubit = BlocProvider.of<GameCubit>(context);
+      setState(() {
+        playerOneColor = gameCubit.playerOneColor;
+        playerTwoColor = gameCubit.playerTwoColor;
+      });
+    });
+  }
+
   Widget build(BuildContext context) {
     return BlocConsumer<GameCubit, State_>(
       listener: (context, state) {
-        // TODO: implement listener
+        // // TODO: implement listener
       },
       builder: (context, state) {
         return InkWell(
@@ -108,10 +121,6 @@ class _BarrState extends State<Barr> {
   }
 
   void putCoin(int index) {
-    final gameCubit = GameCubit.get(context);
-    final playerOneColor = gameCubit.playerOneColor ?? Colors.red;
-    final playerTwoColor = gameCubit.playerTwoColor ?? Colors.yellow;
-
     for (int i = 5; i >= 0; i--) {
       if (coin[i][index] == Colors.white) {
         coin[i][index] = check ? playerTwoColor : playerOneColor;
