@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:connect4/ScreenParts/cubit/cubit.dart';
+import 'cubit/cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsPage extends StatefulWidget {

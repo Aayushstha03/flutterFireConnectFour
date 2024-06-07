@@ -1,4 +1,4 @@
-import 'package:connect4/ScreenParts/cubit/state.dart';
+import 'state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

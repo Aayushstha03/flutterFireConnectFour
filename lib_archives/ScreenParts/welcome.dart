@@ -1,4 +1,4 @@
-import 'package:connect4/ScreenParts/settings.dart';
+import 'settings.dart';
 import 'package:flutter/material.dart';
 
 import 'Connect4Screen.dart';
