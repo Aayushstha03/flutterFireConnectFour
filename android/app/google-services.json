@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "488513440701",
+    "project_id": "multiplayercarddemo",
+    "storage_bucket": "multiplayercarddemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488513440701:android:8ba9dca8db18d7e34f60d4",
+        "android_client_info": {
+          "package_name": "com.example.connect_four"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDojmo7pt50fbXxzggobTovK72Cp_V1dn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

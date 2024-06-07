@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:connect4/ScreenParts/welcome.dart';
-import 'package:connect4/ScreenParts/cubit/cubit.dart'; // Import the GameCubit
+import 'package:connect4/ScreenParts/cubit/cubit.dart';
+import 'package:provider/provider.dart'; // Import the GameCubit
 
-void main() {
-  runApp(const MyApp());
+//firebase
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+import 'firebase_options.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(
+    Provider.value(
+      value: FirebaseFirestore.instance,
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
