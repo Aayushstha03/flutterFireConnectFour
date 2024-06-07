@@ -1,17 +1,25 @@
 import 'package:connect4/pages/homepage.dart';
+import 'package:connect4/providers/game_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => GameProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return MaterialApp(
+      title: 'Connect 4',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: MyHomePage(),
     );
   }
