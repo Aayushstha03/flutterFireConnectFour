@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:connect4/ScreenParts/welcome.dart';
 import 'package:connect4/ScreenParts/cubit/cubit.dart';
-import 'package:provider/provider.dart'; // Import the GameCubit
 
 //firebase
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,8 +16,9 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-    Provider.value(
-      value: FirebaseFirestore.instance,
+    //using repor provider isntead of provider
+    RepositoryProvider(
+      create: (context) => FirebaseFirestore.instance,
       child: MyApp(),
     ),
   );
