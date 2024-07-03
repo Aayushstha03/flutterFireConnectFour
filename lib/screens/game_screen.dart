@@ -9,17 +9,30 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Connect 4')),
+      appBar: AppBar(
+        title: const Text('Connect 4'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_rounded),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        centerTitle: true,
+      ),
       body: Column(
         children: [
-          Expanded(
+          Text(
+            'Player ${Provider.of<GameProvider>(context).currentPlayer}\'s turn',
+            style: const TextStyle(fontSize: 20.0),
+          ),
+          const Expanded(
             child: BoardWidget(),
           ),
-          ElevatedButton(
+          FloatingActionButton.extended(
             onPressed: () {
               Provider.of<GameProvider>(context, listen: false).resetGame();
             },
-            child: const Text('Reset Game'),
+            label: const Text('Reset Board'),
           ),
         ],
       ),
