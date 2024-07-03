@@ -8,7 +8,23 @@ class GameProvider with ChangeNotifier {
   GameBoard get gameBoard => _gameBoard;
   int get currentPlayer => _currentPlayer;
 
-// todo
+  Color playerOneColor = Colors.red;
+  Color playerTwoColor = Colors.yellow;
+
+  void setColors(Color playerOne, Color playerTwo) {
+    playerOneColor = playerOne;
+    playerTwoColor = playerTwo;
+    notifyListeners();
+  }
+
+  Color getPlayerOneColor() {
+    return playerOneColor;
+  }
+
+  Color getPlayerTwoColor() {
+    return playerTwoColor;
+  }
+
   void dropDisc(int column, BuildContext context) {
     if (_gameBoard.dropDisc(column, _currentPlayer)) {
       // Check for win after dropping the disc

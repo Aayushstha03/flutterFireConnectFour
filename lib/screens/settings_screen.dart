@@ -1,4 +1,6 @@
+import 'package:connect4/providers/game_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -8,8 +10,10 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  late Color playerOneColor = Colors.red;
-  late Color playerTwoColor = Colors.red;
+  late Color playerOneColor =
+      Provider.of<GameProvider>(context).getPlayerOneColor();
+  late Color playerTwoColor =
+      Provider.of<GameProvider>(context).getPlayerTwoColor();
 
   @override
   Widget build(BuildContext context) {
