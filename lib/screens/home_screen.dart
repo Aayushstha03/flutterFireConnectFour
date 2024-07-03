@@ -1,4 +1,5 @@
 import 'package:connect4/screens/game_screen.dart';
+import 'package:connect4/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -26,7 +27,7 @@ class HomeScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const GameScreen()));
+                        builder: (context) => const SettingsPage()));
               },
               child: const Text('Settings'),
             ),
