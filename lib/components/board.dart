@@ -24,7 +24,7 @@ class BoardWidget extends StatelessWidget {
             int cellValue = gameProvider.gameBoard.board[row][col];
             return GestureDetector(
               onTap: () {
-                gameProvider.dropDisc(col);
+                gameProvider.dropDisc(col, context);
               },
               child: Cell(value: cellValue),
             );

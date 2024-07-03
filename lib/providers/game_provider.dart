@@ -9,13 +9,29 @@ class GameProvider with ChangeNotifier {
   int get currentPlayer => _currentPlayer;
 
 // todo
-  void dropDisc(int column) {
+  void dropDisc(int column, BuildContext context) {
     if (_gameBoard.dropDisc(column, _currentPlayer)) {
       // Check for win after dropping the disc
       bool hasWon = _gameBoard.checkForWin(_currentPlayer);
       if (hasWon) {
-        // Handle win condition (e.g., update the state, notify listeners)
-        // print("Player $_currentPlayer has won!"); // Placeholder action
+        // Show dialog if win
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Player $_currentPlayer wins!'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    resetGame();
+                  },
+                  child: const Text('Play Again'),
+                ),
+              ],
+            );
+          },
+        );
       } else {
         // Change turn if no win
         _currentPlayer = _currentPlayer == 1 ? 2 : 1;
