@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CellWidget extends StatelessWidget {
+class Cell extends StatelessWidget {
   final int value;
 
-  CellWidget({required this.value});
+  Cell({required this.value});
 
   @override
   Widget build(BuildContext context) {

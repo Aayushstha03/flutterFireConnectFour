@@ -1,9 +1,9 @@
-import 'package:connect4/components/board.dart';
-import 'package:connect4/providers/game_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../providers/game_provider.dart';
+import '../components/board.dart';
 
-class MyHomePage extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
