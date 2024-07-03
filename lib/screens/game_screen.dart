@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import '../providers/game_provider.dart';
 import '../components/board.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class GameScreen extends StatelessWidget {
+  const GameScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
