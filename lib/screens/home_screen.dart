@@ -4,10 +4,12 @@ import '../providers/game_provider.dart';
 import '../components/board.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Connect 4')),
+      appBar: AppBar(title: const Text('Connect 4')),
       body: Column(
         children: [
           Expanded(
@@ -17,7 +19,7 @@ class HomeScreen extends StatelessWidget {
             onPressed: () {
               Provider.of<GameProvider>(context, listen: false).resetGame();
             },
-            child: Text('Reset Game'),
+            child: const Text('Reset Game'),
           ),
         ],
       ),

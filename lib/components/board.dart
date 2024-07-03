@@ -10,7 +10,7 @@ class BoardWidget extends StatelessWidget {
     return Consumer<GameProvider>(
       builder: (context, gameProvider, child) {
         return GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: GameBoard.columns,
           ),
           itemCount: GameBoard.rows * GameBoard.columns,

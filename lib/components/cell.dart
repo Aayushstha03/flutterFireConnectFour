@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class Cell extends StatelessWidget {
   final int value;
 
-  Cell({required this.value});
+  const Cell({super.key, required this.value});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(2.0),
+      margin: const EdgeInsets.all(2.0),
       decoration: BoxDecoration(
         color: value == 1
             ? Colors.red
