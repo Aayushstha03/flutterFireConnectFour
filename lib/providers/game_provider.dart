@@ -8,7 +8,7 @@ class GameProvider with ChangeNotifier {
   GameBoard get gameBoard => _gameBoard;
   int get currentPlayer => _currentPlayer;
 
-  // In your GameProvider class
+// todo
   void dropDisc(int column) {
     if (_gameBoard.dropDisc(column, _currentPlayer)) {
       // Check for win after dropping the disc
