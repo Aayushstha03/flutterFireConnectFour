@@ -18,6 +18,34 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          //if both player select the same colors, show snackbar
+          if (playerOneColor.hashCode == playerTwoColor.hashCode) {
+            //show snackbar
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                duration: Durations.extralong1,
+                showCloseIcon: true,
+                content: Text('Player colors must be different!'),
+              ),
+            );
+          } else {
+            //if different save!
+            Provider.of<GameProvider>(context, listen: false)
+                .setColors(playerOneColor, playerTwoColor);
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                duration: Durations.extralong1,
+                showCloseIcon: true,
+                content: Text('Player settings saved!'),
+              ),
+            );
+            Navigator.of(context).pop();
+          }
+        },
+        child: const Icon(Icons.save),
+      ),
       appBar: AppBar(
         title: const Text('Settings'),
         leading: IconButton(
@@ -34,8 +62,9 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               const SizedBox(height: 20),
               Text(
-                'Select Player 1 color: ${playerOneColor.value}',
-                style: const TextStyle(
+                'Player 1',
+                style: TextStyle(
+                  color: playerOneColor,
                   fontSize: 20,
                 ),
               ),
@@ -73,8 +102,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
-                    fillColor: MaterialStateProperty.all(Colors.teal),
-                    value: Colors.teal,
+                    fillColor: MaterialStateProperty.all(Colors.lightGreen),
+                    value: Colors.lightGreen,
                     groupValue: playerOneColor,
                     onChanged: (value) {
                       setState(() {
@@ -83,8 +112,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
-                    fillColor: MaterialStateProperty.all(Colors.green),
-                    value: Colors.green,
+                    fillColor: MaterialStateProperty.all(Colors.pink),
+                    value: Colors.pink,
                     groupValue: playerOneColor,
                     onChanged: (value) {
                       setState(() {
@@ -93,8 +122,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
-                    fillColor: MaterialStateProperty.all(Colors.purple),
-                    value: Colors.purple,
+                    fillColor: MaterialStateProperty.all(Colors.orange),
+                    value: Colors.orange,
                     groupValue: playerOneColor,
                     onChanged: (value) {
                       setState(() {
@@ -103,8 +132,9 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
-                    fillColor: MaterialStateProperty.all(Colors.black),
-                    value: Colors.black,
+                    fillColor:
+                        MaterialStateProperty.all(Colors.purple.shade300),
+                    value: Colors.purple.shade300,
                     groupValue: playerOneColor,
                     onChanged: (value) {
                       setState(() {
@@ -120,8 +150,9 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               const SizedBox(height: 20),
               Text(
-                'Select Player 2 color: ${playerTwoColor.value}',
-                style: const TextStyle(
+                'Player 2',
+                style: TextStyle(
+                  color: playerTwoColor,
                   fontSize: 20,
                 ),
               ),
@@ -159,8 +190,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
-                    fillColor: MaterialStateProperty.all(Colors.teal),
-                    value: Colors.teal,
+                    fillColor: MaterialStateProperty.all(Colors.lightGreen),
+                    value: Colors.lightGreen,
                     groupValue: playerTwoColor,
                     onChanged: (value) {
                       setState(() {
@@ -169,8 +200,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
-                    fillColor: MaterialStateProperty.all(Colors.green),
-                    value: Colors.green,
+                    fillColor: MaterialStateProperty.all(Colors.pink),
+                    value: Colors.pink,
                     groupValue: playerTwoColor,
                     onChanged: (value) {
                       setState(() {
@@ -179,8 +210,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
-                    fillColor: MaterialStateProperty.all(Colors.purple),
-                    value: Colors.purple,
+                    fillColor: MaterialStateProperty.all(Colors.orange),
+                    value: Colors.orange,
                     groupValue: playerTwoColor,
                     onChanged: (value) {
                       setState(() {
@@ -189,8 +220,9 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   Radio(
-                    fillColor: MaterialStateProperty.all(Colors.black),
-                    value: Colors.black,
+                    fillColor:
+                        MaterialStateProperty.all(Colors.purple.shade300),
+                    value: Colors.purple.shade300,
                     groupValue: playerTwoColor,
                     onChanged: (value) {
                       setState(() {
@@ -202,6 +234,7 @@ class _SettingsPageState extends State<SettingsPage> {
               )
             ],
           ),
+        
         ],
       ),
     );
