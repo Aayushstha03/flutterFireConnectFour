@@ -22,8 +22,13 @@ class GameScreen extends StatelessWidget {
       body: Column(
         children: [
           Text(
-            'Player ${Provider.of<GameProvider>(context).currentPlayer}\'s turn',
-            style: const TextStyle(fontSize: 20.0),
+            'Player ${Provider.of<GameProvider>(context).currentPlayer} turn',
+            style: TextStyle(
+              fontSize: 20.0,
+              color: Provider.of<GameProvider>(context).currentPlayer == 1
+                  ? Provider.of<GameProvider>(context).playerOneColor
+                  : Provider.of<GameProvider>(context).playerTwoColor,
+            ),
           ),
           const Expanded(
             child: BoardWidget(),

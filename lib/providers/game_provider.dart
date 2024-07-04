@@ -25,7 +25,7 @@ class GameProvider with ChangeNotifier {
     return playerTwoColor;
   }
 
-  void dropDisc(int column, BuildContext context) {
+  void whenDropedDisc(int column, BuildContext context) {
     if (_gameBoard.dropDisc(column, _currentPlayer)) {
       // Check for win after dropping the disc
       bool hasWon = _gameBoard.checkForWin(_currentPlayer);
