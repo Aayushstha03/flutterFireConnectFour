@@ -1,12 +1,18 @@
+import 'package:connect4/multiplayer/firestore_controller.dart';
 import 'package:flutter/material.dart';
 import '../models/game_board.dart';
 
 class GameProvider with ChangeNotifier {
   GameBoard _gameBoard = GameBoard();
   int _currentPlayer = 1;
+  final FirestoreService _firestoreService;
+  String? _gameId;
+
+  GameProvider(this._firestoreService);
 
   GameBoard get gameBoard => _gameBoard;
   int get currentPlayer => _currentPlayer;
+  String? get gameId => _gameId;
 
   Color playerOneColor = Colors.red;
   Color playerTwoColor = Colors.yellow;
@@ -25,9 +31,30 @@ class GameProvider with ChangeNotifier {
     return playerTwoColor;
   }
 
-  void whenDropedDisc(int column, BuildContext context) {
-    if (_gameBoard.dropDisc(column, _currentPlayer)) {
-      // Check for win after dropping the disc
+  Future<void> createGame() async {
+    _gameId = await _firestoreService.createGame();
+    _subscribeToGame();
+  }
+
+  Future<void> joinGame(String gameId) async {
+    _gameId = gameId;
+    _subscribeToGame();
+  }
+
+  void _subscribeToGame() {
+    if (_gameId != null) {
+      _firestoreService.getGameStream(_gameId!).listen((snapshot) {
+        var data = snapshot.data() as Map<String, dynamic>;
+        _gameBoard = GameBoard.fromFirestore(data['board']);
+        _currentPlayer = data['currentPlayer'];
+        notifyListeners();
+      });
+    }
+  }
+
+  Future<void> whenDropedDisc(int column, BuildContext context) async {
+    if (_gameId != null) {
+      await _firestoreService.makeMove(_gameId!, column, _currentPlayer);
       bool hasWon = _gameBoard.checkForWin(_currentPlayer);
       if (hasWon) {
         // Show dialog if win
@@ -56,7 +83,10 @@ class GameProvider with ChangeNotifier {
     }
   }
 
-  void resetGame() {
+  Future<void> resetGame() async {
+    if (_gameId != null) {
+      await _firestoreService.resetGame(_gameId!);
+    }
     _gameBoard = GameBoard();
     _currentPlayer = 1;
     notifyListeners();
