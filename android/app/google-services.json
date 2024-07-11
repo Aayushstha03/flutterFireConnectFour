@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "488513440701",
-    "project_id": "multiplayercarddemo",
-    "storage_bucket": "multiplayercarddemo.appspot.com"
+    "project_number": "1049456793144",
+    "project_id": "connect4-39483",
+    "storage_bucket": "connect4-39483.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:488513440701:android:8ba9dca8db18d7e34f60d4",
+        "mobilesdk_app_id": "1:1049456793144:android:c1eb2ea9e1d08b53fd78cd",
         "android_client_info": {
           "package_name": "com.example.connect_four"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDojmo7pt50fbXxzggobTovK72Cp_V1dn0"
+          "current_key": "AIzaSyDo6XXn20_-EL2Np7ZyOZ995uG10G3Zb_g"
         }
       ],
       "services": {
