@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/game_board.dart';
 
 class GameProvider with ChangeNotifier {
   GameBoard _gameBoard = GameBoard();
   int _currentPlayer = 1;
+  String? _gameId;
+  String? _playerId;
 
   GameBoard get gameBoard => _gameBoard;
   int get currentPlayer => _currentPlayer;
@@ -25,12 +28,44 @@ class GameProvider with ChangeNotifier {
     return playerTwoColor;
   }
 
-  void whenDropedDisc(int column, BuildContext context) {
+  void initializeGame(String gameId, String playerId) {
+    _gameId = gameId;
+    _playerId = playerId;
+
+    FirebaseFirestore.instance
+        .collection('games')
+        .doc(gameId)
+        .snapshots()
+        .listen((snapshot) {
+      if (snapshot.exists) {
+        var data = snapshot.data()!;
+        _gameBoard.board = List<List<int>>.generate(GameBoard.rows, (i) {
+          return List<int>.generate(GameBoard.columns, (j) {
+            return data['board'][i * GameBoard.columns + j];
+          });
+        });
+        _currentPlayer = data['currentTurn'] == 'player1' ? 1 : 2;
+        notifyListeners();
+      }
+    });
+  }
+
+  Future<void> whenDropedDisc(int column, BuildContext context) async {
+    if (_gameId == null ||
+        (_currentPlayer == 1 && _playerId != 'player1') ||
+        (_currentPlayer == 2 && _playerId != 'player2')) return;
+
     if (_gameBoard.dropDisc(column, _currentPlayer)) {
-      // Check for win after dropping the disc
       bool hasWon = _gameBoard.checkForWin(_currentPlayer);
+
+      await FirebaseFirestore.instance.collection('games').doc(_gameId).update({
+        'board': _gameBoard.board.expand((row) => row).toList(),
+        'currentTurn':
+            hasWon ? null : (_currentPlayer == 1 ? 'player2' : 'player1'),
+        'status': hasWon ? 'completed' : 'ongoing',
+      });
+
       if (hasWon) {
-        // Show dialog if win
         showDialog(
           context: context,
           builder: (context) {
@@ -49,9 +84,9 @@ class GameProvider with ChangeNotifier {
           },
         );
       } else {
-        // Change turn if no win
         _currentPlayer = _currentPlayer == 1 ? 2 : 1;
       }
+
       notifyListeners();
     }
   }
@@ -59,6 +94,13 @@ class GameProvider with ChangeNotifier {
   void resetGame() {
     _gameBoard = GameBoard();
     _currentPlayer = 1;
+    if (_gameId != null) {
+      FirebaseFirestore.instance.collection('games').doc(_gameId).set({
+        'board': _gameBoard.board.expand((row) => row).toList(),
+        'currentTurn': 'player1',
+        'status': 'ongoing',
+      });
+    }
     notifyListeners();
   }
 }
