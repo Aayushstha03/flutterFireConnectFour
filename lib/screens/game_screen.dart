@@ -11,41 +11,45 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => GameProvider()..initializeGame(gameId, playerId),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Connect 4'),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_rounded),
-            onPressed: () {
-              Navigator.of(context).pop();
+    final gameProvider = Provider.of<GameProvider>(context, listen: false);
+    gameProvider.initializeGame(gameId, playerId);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Connect 4'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_rounded),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          Consumer<GameProvider>(
+            builder: (context, provider, child) {
+              return Text(
+                'Player ${provider.currentPlayer} turn',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: provider.currentPlayer == 1
+                      ? provider.playerOneColor
+                      : provider.playerTwoColor,
+                ),
+              );
             },
           ),
-          centerTitle: true,
-        ),
-        body: Column(
-          children: [
-            Text(
-              'Player ${Provider.of<GameProvider>(context).currentPlayer} turn',
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Provider.of<GameProvider>(context).currentPlayer == 1
-                    ? Provider.of<GameProvider>(context).playerOneColor
-                    : Provider.of<GameProvider>(context).playerTwoColor,
-              ),
-            ),
-            const Expanded(
-              child: BoardWidget(),
-            ),
-            FloatingActionButton.extended(
-              onPressed: () {
-                Provider.of<GameProvider>(context, listen: false).resetGame();
-              },
-              label: const Text('Reset Board'),
-            ),
-          ],
-        ),
+          const Expanded(
+            child: BoardWidget(),
+          ),
+          FloatingActionButton.extended(
+            onPressed: () {
+              gameProvider.resetGame();
+            },
+            label: const Text('Reset Board'),
+          ),
+        ],
       ),
     );
   }

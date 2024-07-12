@@ -39,10 +39,11 @@ class GameProvider with ChangeNotifier {
         .listen((snapshot) {
       if (snapshot.exists) {
         var data = snapshot.data()!;
+        print("Retrieved data from Firestore: $data");
+        var flatBoard = List<int>.from(data['board']);
         _gameBoard.board = List<List<int>>.generate(GameBoard.rows, (i) {
-          return List<int>.generate(GameBoard.columns, (j) {
-            return data['board'][i * GameBoard.columns + j];
-          });
+          return flatBoard.sublist(
+              i * GameBoard.columns, (i + 1) * GameBoard.columns);
         });
         _currentPlayer = data['currentTurn'] == 'player1' ? 1 : 2;
         notifyListeners();
@@ -58,8 +59,11 @@ class GameProvider with ChangeNotifier {
     if (_gameBoard.dropDisc(column, _currentPlayer)) {
       bool hasWon = _gameBoard.checkForWin(_currentPlayer);
 
+      var flattenedBoard = _gameBoard.board.expand((row) => row).toList();
+      print("Sending data to Firestore: $flattenedBoard");
+
       await FirebaseFirestore.instance.collection('games').doc(_gameId).update({
-        'board': _gameBoard.board.expand((row) => row).toList(),
+        'board': flattenedBoard,
         'currentTurn':
             hasWon ? null : (_currentPlayer == 1 ? 'player2' : 'player1'),
         'status': hasWon ? 'completed' : 'ongoing',
@@ -94,9 +98,12 @@ class GameProvider with ChangeNotifier {
   void resetGame() {
     _gameBoard = GameBoard();
     _currentPlayer = 1;
+    var flattenedBoard = _gameBoard.board.expand((row) => row).toList();
+    print("Resetting game and sending data to Firestore: $flattenedBoard");
+
     if (_gameId != null) {
       FirebaseFirestore.instance.collection('games').doc(_gameId).set({
-        'board': _gameBoard.board.expand((row) => row).toList(),
+        'board': flattenedBoard,
         'currentTurn': 'player1',
         'status': 'ongoing',
       });
