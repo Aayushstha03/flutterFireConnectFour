@@ -1,5 +1,4 @@
-import 'package:connect4/screens/local_game_screen.dart';
-import 'package:connect4/screens/multiplayer_screen.dart';
+import 'package:connect4/screens/game_screen.dart';
 import 'package:connect4/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,39 +10,24 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Center the buttons
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Image(image: AssetImage('assets/logo.png')),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SinglePlayerGameScreen(),
-                  ),
-                );
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const GameScreen()));
               },
-              child: const Text('Single Player'),
+              child: const Text('Start Game'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MultiPlayerGameScreen(),
-                  ),
-                );
-              },
-              child: const Text('Multiplayer'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SettingsPage(),
-                  ),
-                );
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SettingsPage()));
               },
               child: const Text('Settings'),
             ),
