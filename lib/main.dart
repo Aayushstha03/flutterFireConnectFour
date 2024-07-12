@@ -15,10 +15,12 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => GameProvider(),
+    MultiProvider(
+      providers: [
+        Provider<FirebaseFirestore>.value(value: FirebaseFirestore.instance),
+        ChangeNotifierProvider(create: (context) => GameProvider()),
+      ],
       child: const MyApp(),
     ),
   );
