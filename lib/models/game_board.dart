@@ -5,12 +5,6 @@ class GameBoard {
 
   GameBoard() : board = List.generate(rows, (_) => List.filled(columns, 0));
 
-  GameBoard.fromFirestore(List<dynamic> firestoreBoard)
-      : board = List<List<int>>.from(
-            firestoreBoard.map((row) => List<int>.from(row)));
-
-  List<List<int>> toFirestore() => board;
-
   bool dropDisc(int column, int player) {
     for (int row = rows - 1; row >= 0; row--) {
       if (board[row][column] == 0) {
@@ -21,6 +15,7 @@ class GameBoard {
     return false;
   }
 
+//implemented checkForWin method
   bool checkForWin(int player) {
     for (int row = 0; row < rows; row++) {
       for (int col = 0; col < columns; col++) {
