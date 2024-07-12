@@ -3,25 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/game_provider.dart';
 
-// Firebase imports
+//firebase stuff
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'firebase_options.dart';
 
 Future<void> main() async {
-  // Firebase initialization
+  //firebase initialization
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
   runApp(
-    MultiProvider(
-      providers: [
-        Provider<FirebaseFirestore>.value(value: FirebaseFirestore.instance),
-        ChangeNotifierProvider(create: (context) => GameProvider()),
-      ],
+    ChangeNotifierProvider(
+      create: (context) => GameProvider(),
       child: const MyApp(),
     ),
   );
