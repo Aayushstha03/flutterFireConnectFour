@@ -51,11 +51,13 @@ class HomeScreen extends StatelessWidget {
   }
 
   Future<String> createGame(String playerId) async {
+    var board = List.generate(6, (i) => List.filled(7, 0));
+    var flatBoard = board.expand((row) => row).toList();
     DocumentReference gameRef =
         await FirebaseFirestore.instance.collection('games').add({
       'player1': playerId,
       'player2': null,
-      'board': List.generate(6, (i) => List.filled(7, 0)),
+      'board': flatBoard,
       'currentTurn': 'player1',
       'status': 'ongoing',
     });
