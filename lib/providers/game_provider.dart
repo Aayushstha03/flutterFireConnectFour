@@ -39,7 +39,7 @@ class GameProvider with ChangeNotifier {
         .listen((snapshot) {
       if (snapshot.exists) {
         var data = snapshot.data()!;
-        // print("Retrieved data from Firestore: $data");
+        print("Retrieved data from Firestore: $data");
         var flatBoard = List<int>.from(data['board']);
         _gameBoard.board = List<List<int>>.generate(GameBoard.rows, (i) {
           return flatBoard.sublist(
@@ -78,6 +78,7 @@ class GameProvider with ChangeNotifier {
               actions: [
                 TextButton(
                   onPressed: () {
+                    if (!context.mounted) return;
                     Navigator.of(context).pop();
                     resetGame();
                   },
@@ -88,7 +89,8 @@ class GameProvider with ChangeNotifier {
           },
         );
       } else {
-        _currentPlayer = _currentPlayer == 1 ? 2 : 1;
+        _currentPlayer = (_currentPlayer == 1) ? 2 : 1;
+        print('currentPlayer: $_currentPlayer');
       }
 
       notifyListeners();

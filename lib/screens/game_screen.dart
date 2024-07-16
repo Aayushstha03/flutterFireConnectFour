@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../providers/game_provider.dart';
 import '../components/board.dart';
 
@@ -20,6 +22,9 @@ class GameScreen extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
           onPressed: () {
+            DocumentReference gameRef =
+                FirebaseFirestore.instance.collection('games').doc(gameId);
+            gameRef.delete();
             Navigator.of(context).pop();
           },
         ),
