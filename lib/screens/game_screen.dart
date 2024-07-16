@@ -46,6 +46,13 @@ class GameScreen extends StatelessWidget {
           FloatingActionButton.extended(
             onPressed: () {
               gameProvider.resetGame();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  duration: Durations.extralong1,
+                  showCloseIcon: true,
+                  content: Text('Board Reset'),
+                ),
+              );
             },
             label: const Text('Reset Board'),
           ),

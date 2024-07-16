@@ -39,7 +39,7 @@ class GameProvider with ChangeNotifier {
         .listen((snapshot) {
       if (snapshot.exists) {
         var data = snapshot.data()!;
-        print("Retrieved data from Firestore: $data");
+        // print("Retrieved data from Firestore: $data");
         var flatBoard = List<int>.from(data['board']);
         _gameBoard.board = List<List<int>>.generate(GameBoard.rows, (i) {
           return flatBoard.sublist(
