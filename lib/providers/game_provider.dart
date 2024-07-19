@@ -39,13 +39,14 @@ class GameProvider with ChangeNotifier {
         .listen((snapshot) {
       if (snapshot.exists) {
         var data = snapshot.data()!;
-        print("Retrieved data from Firestore: $data");
+        print("Retrieved data from Firestore: $data\n\n");
         var flatBoard = List<int>.from(data['board']);
         _gameBoard.board = List<List<int>>.generate(GameBoard.rows, (i) {
           return flatBoard.sublist(
               i * GameBoard.columns, (i + 1) * GameBoard.columns);
         });
-        _currentPlayer = data['currentTurn'] == 'player1' ? 1 : 2;
+        _currentPlayer = (data['currentTurn'] == 'player1') ? 1 : 2;
+        print('In game Init function currentPlayer: $_currentPlayer\n\n');
         notifyListeners();
       }
     });
@@ -60,7 +61,7 @@ class GameProvider with ChangeNotifier {
       bool hasWon = _gameBoard.checkForWin(_currentPlayer);
 
       var flattenedBoard = _gameBoard.board.expand((row) => row).toList();
-      print("Sending data to Firestore: $flattenedBoard");
+      print("Sending data to Firestore: $flattenedBoard\n\n");
 
       await FirebaseFirestore.instance.collection('games').doc(_gameId).update({
         'board': flattenedBoard,
@@ -88,11 +89,7 @@ class GameProvider with ChangeNotifier {
             );
           },
         );
-      } else {
-        _currentPlayer = (_currentPlayer == 1) ? 2 : 1;
-        print('currentPlayer: $_currentPlayer');
       }
-
       notifyListeners();
     }
   }
