@@ -28,7 +28,7 @@ class GameProvider with ChangeNotifier {
     return playerTwoColor;
   }
 
-  void initializeGame(String gameId, String playerId) {
+  void initializeGame(String gameId, String playerId, BuildContext context) {
     _gameId = gameId;
     _playerId = playerId;
 
@@ -45,8 +45,32 @@ class GameProvider with ChangeNotifier {
           return flatBoard.sublist(
               i * GameBoard.columns, (i + 1) * GameBoard.columns);
         });
+
         _currentPlayer = (data['currentTurn'] == 'player1') ? 1 : 2;
         print('In game Init function currentPlayer: $_currentPlayer\n\n');
+
+        if (data['status'] == '1' || data['status'] == '2') {
+          print('Win check loop from inti');
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Player ${data['status']} wins!'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      if (!context.mounted) return;
+                      Navigator.of(context).pop();
+                      resetGame();
+                    },
+                    child: const Text('Play Again'),
+                  ),
+                ],
+              );
+            },
+          );
+        }
+
         notifyListeners();
       }
     });
@@ -65,31 +89,10 @@ class GameProvider with ChangeNotifier {
 
       await FirebaseFirestore.instance.collection('games').doc(_gameId).update({
         'board': flattenedBoard,
+        'status': hasWon ? '$_currentPlayer' : 'ongoing',
         'currentTurn':
             hasWon ? null : (_currentPlayer == 1 ? 'player2' : 'player1'),
-        'status': hasWon ? 'completed' : 'ongoing',
       });
-
-      if (hasWon) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text('Player $_currentPlayer wins!'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    if (!context.mounted) return;
-                    Navigator.of(context).pop();
-                    resetGame();
-                  },
-                  child: const Text('Play Again'),
-                ),
-              ],
-            );
-          },
-        );
-      }
       notifyListeners();
     }
   }

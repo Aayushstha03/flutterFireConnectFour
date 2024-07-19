@@ -14,7 +14,7 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameProvider = Provider.of<GameProvider>(context, listen: false);
-    gameProvider.initializeGame(gameId, playerId);
+    gameProvider.initializeGame(gameId, playerId, context);
 
     return Scaffold(
       appBar: AppBar(
