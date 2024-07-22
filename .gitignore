@@ -34,7 +34,7 @@ migrate_working_dir/
 
 
 /lib/firebase_options.dart
-
+/lib/multiplayer/firestore_controller.dart
 # Web related
 
 # Symbolication related
