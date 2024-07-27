@@ -9,10 +9,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            //logo
             const Image(image: AssetImage('assets/logo.png')),
+            //buttons for game creation and joining
             ElevatedButton(
               onPressed: () async {
                 String gameId = await createGame('player1');
