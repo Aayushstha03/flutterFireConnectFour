@@ -2,10 +2,8 @@ import 'package:connect4/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/game_provider.dart';
-
 //firebase stuff
 import 'package:firebase_core/firebase_core.dart';
-
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -30,7 +28,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Connect 4',
-      theme: ThemeData.dark(),
+      theme: ThemeData(
+        fontFamily: 'JoseFinSans',
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.amber,
+          brightness: Brightness.dark,
+        ),
+      ),
       home: const HomeScreen(),
     );
   }

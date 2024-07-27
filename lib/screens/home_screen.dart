@@ -17,8 +17,13 @@ class HomeScreen extends StatelessWidget {
           children: [
             //logo
             const Image(image: AssetImage('assets/logo.png')),
+            const SizedBox(height: 16),
             //buttons for game creation and joining
             ElevatedButton(
+              style: ButtonStyle(
+                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                    const EdgeInsets.all(16)),
+              ),
               onPressed: () async {
                 String gameId = await createGame('player1');
                 Navigator.push(
@@ -27,9 +32,21 @@ class HomeScreen extends StatelessWidget {
                         builder: (context) =>
                             GameScreen(gameId: gameId, playerId: 'player1')));
               },
-              child: const Text('Create Game'),
+              child: const Text(
+                'Create Game',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
+            const SizedBox(height: 16),
+
             ElevatedButton(
+              style: ButtonStyle(
+                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                    const EdgeInsets.all(16)),
+              ),
               onPressed: () async {
                 String gameId = await joinGame('player2');
                 Navigator.push(
@@ -38,16 +55,34 @@ class HomeScreen extends StatelessWidget {
                         builder: (context) =>
                             GameScreen(gameId: gameId, playerId: 'player2')));
               },
-              child: const Text('Join Game'),
+              child: const Text(
+                'Join Game',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
+            const SizedBox(height: 16),
+
             ElevatedButton(
+              style: ButtonStyle(
+                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                    const EdgeInsets.all(16)),
+              ),
               onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const SettingsPage()));
               },
-              child: const Text('Settings'),
+              child: const Text(
+                'Settings',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),
