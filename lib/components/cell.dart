@@ -19,7 +19,7 @@ class Cell extends StatelessWidget {
             ? Provider.of<GameProvider>(context).getPlayerOneColor()
             : value == 2
                 ? Provider.of<GameProvider>(context).getPlayerTwoColor()
-                : Colors.white,
+                : Theme.of(context).colorScheme.secondaryContainer,
         shape: BoxShape.circle,
       ),
     );

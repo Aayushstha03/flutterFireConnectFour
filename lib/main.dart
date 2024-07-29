@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Connect 4',
       theme: ThemeData(
-        fontFamily: 'JoseFinSans',
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.amber,
           brightness: Brightness.dark,
