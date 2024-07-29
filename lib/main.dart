@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       title: 'Connect 4',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.amber,
+          seedColor: Provider.of<GameProvider>(context).playerOneColor,
           brightness: Brightness.dark,
         ),
       ),
