@@ -14,7 +14,6 @@ class _SettingsPageState extends State<SettingsPage> {
       Provider.of<GameProvider>(context).getPlayerOneColor();
   late Color playerTwoColor =
       Provider.of<GameProvider>(context).getPlayerTwoColor();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -234,7 +233,6 @@ class _SettingsPageState extends State<SettingsPage> {
               )
             ],
           ),
-        
         ],
       ),
     );

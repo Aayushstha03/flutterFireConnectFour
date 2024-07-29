@@ -28,12 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Connect 4',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Provider.of<GameProvider>(context).playerOneColor,
-          brightness: Brightness.dark,
-        ),
-      ),
+      theme: ThemeData.dark(),
       home: const HomeScreen(),
     );
   }
