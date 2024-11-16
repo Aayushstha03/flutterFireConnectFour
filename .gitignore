@@ -32,7 +32,6 @@ migrate_working_dir/
 .pub/
 /build/
 
-
 /lib/firebase_options.dart
 /lib/multiplayer/firestore_controller.dart
 # Web related
@@ -47,3 +46,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+/android
+/assets
+/ios
+/linux
+/macos
+/web
+/windows
